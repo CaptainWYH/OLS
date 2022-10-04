@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ols.course.mapper.OlsSectionMapper">
+    
+    <resultMap type="OlsSection" id="OlsSectionResult">
+        <result property="id"    column="id"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="sectionName"    column="section_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectOlsSectionVo">
+        select id, course_id, section_name, create_by, create_time, update_by, update_time, version from ols_section
+    </sql>
+
+    <select id="selectOlsSectionList" parameterType="OlsSection" resultMap="OlsSectionResult">
+        <include refid="selectOlsSectionVo"/>
+        <where>  
+            <if test="courseId != null "> and course_id = #{courseId}</if>
+            <if test="sectionName != null  and sectionName != ''"> and section_name like concat('%', #{sectionName}, '%')</if>
+            <if test="version != null "> and version = #{version}</if>
+        </where>
+    </select>
+    
+    <select id="selectOlsSectionById" parameterType="Long" resultMap="OlsSectionResult">
+        <include refid="selectOlsSectionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOlsSection" parameterType="OlsSection">
+        insert into ols_section
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="sectionName != null">section_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="sectionName != null">#{sectionName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOlsSection" parameterType="OlsSection">
+        update ols_section
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="sectionName != null">section_name = #{sectionName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOlsSectionById" parameterType="Long">
+        delete from ols_section where id = #{id}
+    </delete>
+
+    <delete id="deleteOlsSectionByIds" parameterType="String">
+        delete from ols_section where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ols.course.mapper.OlsStudentCourseMapper">
+    
+    <resultMap type="OlsStudentCourse" id="OlsStudentCourseResult">
+        <result property="id"    column="id"    />
+        <result property="studnetId"    column="studnet_id"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="courseCredit"    column="course_credit"    />
+    </resultMap>
+
+    <sql id="selectOlsStudentCourseVo">
+        select id, studnet_id, course_id, course_credit from ols_student_course
+    </sql>
+
+    <select id="selectOlsStudentCourseList" parameterType="OlsStudentCourse" resultMap="OlsStudentCourseResult">
+        <include refid="selectOlsStudentCourseVo"/>
+        <where>  
+            <if test="studnetId != null "> and studnet_id = #{studnetId}</if>
+            <if test="courseId != null "> and course_id = #{courseId}</if>
+            <if test="courseCredit != null "> and course_credit = #{courseCredit}</if>
+        </where>
+    </select>
+    
+    <select id="selectOlsStudentCourseById" parameterType="Long" resultMap="OlsStudentCourseResult">
+        <include refid="selectOlsStudentCourseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOlsStudentCourse" parameterType="OlsStudentCourse">
+        insert into ols_student_course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="studnetId != null">studnet_id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="courseCredit != null">course_credit,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="studnetId != null">#{studnetId},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="courseCredit != null">#{courseCredit},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOlsStudentCourse" parameterType="OlsStudentCourse">
+        update ols_student_course
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studnetId != null">studnet_id = #{studnetId},</if>
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="courseCredit != null">course_credit = #{courseCredit},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOlsStudentCourseById" parameterType="Long">
+        delete from ols_student_course where id = #{id}
+    </delete>
+
+    <delete id="deleteOlsStudentCourseByIds" parameterType="String">
+        delete from ols_student_course where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

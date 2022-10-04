@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ols.course.mapper.OlsCourseMapper">
+    
+    <resultMap type="OlsCourse" id="OlsCourseResult">
+        <result property="id"    column="id"    />
+        <result property="courseCode"    column="course_code"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="courseCredit"    column="course_credit"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectOlsCourseVo">
+        select id, course_code, course_name, course_credit, create_by, create_time, update_by, update_time, version from ols_course
+    </sql>
+
+    <select id="selectOlsCourseList" parameterType="OlsCourse" resultMap="OlsCourseResult">
+        <include refid="selectOlsCourseVo"/>
+        <where>  
+            <if test="courseCode != null  and courseCode != ''"> and course_code = #{courseCode}</if>
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="courseCredit != null "> and course_credit = #{courseCredit}</if>
+            <if test="version != null "> and version = #{version}</if>
+        </where>
+    </select>
+    
+    <select id="selectOlsCourseById" parameterType="Long" resultMap="OlsCourseResult">
+        <include refid="selectOlsCourseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOlsCourse" parameterType="OlsCourse">
+        insert into ols_course
+        (id, course_code, course_name, course_credit, create_by, create_time)
+        values (#{id},#{courseCode},#{courseName},#{courseCredit},#{createBy},#{createTime})
+    </insert>
+
+    <update id="updateOlsCourse" parameterType="OlsCourse">
+        update ols_course
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseCode != null">course_code = #{courseCode},</if>
+            <if test="courseName != null">course_name = #{courseName},</if>
+            <if test="courseCredit != null">course_credit = #{courseCredit},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOlsCourseById" parameterType="Long">
+        delete from ols_course where id = #{id}
+    </delete>
+
+    <delete id="deleteOlsCourseByIds" parameterType="String">
+        delete from ols_course where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

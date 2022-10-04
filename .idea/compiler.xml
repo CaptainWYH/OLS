@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ols-framework" />
+        <module name="ols-system" />
+        <module name="ols-common" />
+        <module name="ols-quartz" />
+        <module name="ols-course" />
+        <module name="ols-generator" />
+        <module name="ols-admin" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

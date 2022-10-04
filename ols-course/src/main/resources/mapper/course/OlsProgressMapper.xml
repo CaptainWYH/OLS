@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ols.course.mapper.OlsProgressMapper">
+    
+    <resultMap type="OlsProgress" id="OlsProgressResult">
+        <result property="id"    column="id"    />
+        <result property="mediaId"    column="media_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="progressStatus"    column="progress_status"    />
+    </resultMap>
+
+    <sql id="selectOlsProgressVo">
+        select id, media_id, student_id, progress_status from ols_progress
+    </sql>
+
+    <select id="selectOlsProgressList" parameterType="OlsProgress" resultMap="OlsProgressResult">
+        <include refid="selectOlsProgressVo"/>
+        <where>  
+            <if test="mediaId != null "> and media_id = #{mediaId}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="progressStatus != null "> and progress_status = #{progressStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectOlsProgressById" parameterType="Long" resultMap="OlsProgressResult">
+        <include refid="selectOlsProgressVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOlsProgress" parameterType="OlsProgress">
+        insert into ols_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mediaId != null">media_id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="progressStatus != null">progress_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="mediaId != null">#{mediaId},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="progressStatus != null">#{progressStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOlsProgress" parameterType="OlsProgress">
+        update ols_progress
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mediaId != null">media_id = #{mediaId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="progressStatus != null">progress_status = #{progressStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOlsProgressById" parameterType="Long">
+        delete from ols_progress where id = #{id}
+    </delete>
+
+    <delete id="deleteOlsProgressByIds" parameterType="String">
+        delete from ols_progress where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

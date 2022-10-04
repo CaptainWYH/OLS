@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ols.course.mapper.OlsMediaMapper">
+    
+    <resultMap type="OlsMedia" id="OlsMediaResult">
+        <result property="id"    column="id"    />
+        <result property="sectionId"    column="section_id"    />
+        <result property="mediaContent"    column="media_content"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectOlsMediaVo">
+        select id, section_id, media_content, create_by, create_time, update_by, update_time, version from ols_media
+    </sql>
+
+    <select id="selectOlsMediaList" parameterType="OlsMedia" resultMap="OlsMediaResult">
+        <include refid="selectOlsMediaVo"/>
+        <where>  
+            <if test="sectionId != null "> and section_id = #{sectionId}</if>
+            <if test="mediaContent != null  and mediaContent != ''"> and media_content = #{mediaContent}</if>
+            <if test="version != null "> and version = #{version}</if>
+        </where>
+    </select>
+    
+    <select id="selectOlsMediaById" parameterType="Long" resultMap="OlsMediaResult">
+        <include refid="selectOlsMediaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOlsMedia" parameterType="OlsMedia">
+        insert into ols_media
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="sectionId != null">section_id,</if>
+            <if test="mediaContent != null">media_content,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="sectionId != null">#{sectionId},</if>
+            <if test="mediaContent != null">#{mediaContent},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOlsMedia" parameterType="OlsMedia">
+        update ols_media
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sectionId != null">section_id = #{sectionId},</if>
+            <if test="mediaContent != null">media_content = #{mediaContent},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOlsMediaById" parameterType="Long">
+        delete from ols_media where id = #{id}
+    </delete>
+
+    <delete id="deleteOlsMediaByIds" parameterType="String">
+        delete from ols_media where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

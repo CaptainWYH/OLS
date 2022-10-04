@@ -61,6 +61,13 @@
             <artifactId>ols-generator</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.ols</groupId>
+            <artifactId>ols-course</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>

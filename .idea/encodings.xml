@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ols-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-course/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-course/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-generator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-quartz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-quartz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ols-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
