@@ -1,0 +1,7 @@
+# Project exclude paths
+/ols-admin/target/
+/ols-common/target/
+/ols-framework/target/
+/ols-generator/target/
+/ols-quartz/target/
+/ols-system/target/
