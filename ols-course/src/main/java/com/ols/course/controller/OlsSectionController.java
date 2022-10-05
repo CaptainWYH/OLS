@@ -2,6 +2,8 @@ package com.ols.course.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ols.common.core.page.TableDataInfo;
 
 /**
  * 章节Controller
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -77,6 +79,8 @@ public class OlsSectionController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody OlsSection olsSection)
     {
+        olsSection.setCreateBy(getUsername());
+        olsSection.setId(IdWorker.getId());
         return toAjax(olsSectionService.insertOlsSection(olsSection));
     }
 
@@ -100,5 +104,13 @@ public class OlsSectionController extends BaseController
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(olsSectionService.deleteOlsSectionByIds(ids));
+    }
+
+    /**
+     * 根据课程id获取章节
+     */
+    @GetMapping("/courseSections/{id}")
+    public AjaxResult courseSections(@PathVariable("id") Long id){
+        return AjaxResult.success(olsSectionService.getSessionsByCourseId(id));
     }
 }

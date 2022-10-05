@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ols.course.mapper.OlsSectionMapper">
-    
+
     <resultMap type="OlsSection" id="OlsSectionResult">
         <result property="id"    column="id"    />
         <result property="courseId"    column="course_id"    />
@@ -21,18 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectOlsSectionList" parameterType="OlsSection" resultMap="OlsSectionResult">
         <include refid="selectOlsSectionVo"/>
-        <where>  
+        <where>
             <if test="courseId != null "> and course_id = #{courseId}</if>
             <if test="sectionName != null  and sectionName != ''"> and section_name like concat('%', #{sectionName}, '%')</if>
             <if test="version != null "> and version = #{version}</if>
         </where>
     </select>
-    
+
     <select id="selectOlsSectionById" parameterType="Long" resultMap="OlsSectionResult">
         <include refid="selectOlsSectionVo"/>
         where id = #{id}
     </select>
-        
+    <select id="getSectionVoList" resultType="com.ols.course.domain.vo.SessionsVO">
+        select * from ols_section where course_id = #{id}
+    </select>
+
     <insert id="insertOlsSection" parameterType="OlsSection">
         insert into ols_section
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOlsSectionByIds" parameterType="String">
-        delete from ols_section where id in 
+        delete from ols_section where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

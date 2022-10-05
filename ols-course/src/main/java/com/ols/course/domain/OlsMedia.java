@@ -1,5 +1,7 @@
 package com.ols.course.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ols.common.annotation.Excel;
@@ -7,7 +9,7 @@ import com.ols.common.core.domain.BaseEntity;
 
 /**
  * 学习媒体对象 ols_media
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -16,6 +18,7 @@ public class OlsMedia extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /** 章节id */
@@ -30,39 +33,39 @@ public class OlsMedia extends BaseEntity
     @Excel(name = "版本号")
     private Long version;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setSectionId(Long sectionId) 
+    public void setSectionId(Long sectionId)
     {
         this.sectionId = sectionId;
     }
 
-    public Long getSectionId() 
+    public Long getSectionId()
     {
         return sectionId;
     }
-    public void setMediaContent(String mediaContent) 
+    public void setMediaContent(String mediaContent)
     {
         this.mediaContent = mediaContent;
     }
 
-    public String getMediaContent() 
+    public String getMediaContent()
     {
         return mediaContent;
     }
-    public void setVersion(Long version) 
+    public void setVersion(Long version)
     {
         this.version = version;
     }
 
-    public Long getVersion() 
+    public Long getVersion()
     {
         return version;
     }

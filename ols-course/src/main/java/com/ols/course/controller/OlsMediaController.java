@@ -2,6 +2,8 @@ package com.ols.course.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ols.common.core.page.TableDataInfo;
 
 /**
  * 学习媒体Controller
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -77,6 +79,8 @@ public class OlsMediaController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody OlsMedia olsMedia)
     {
+        olsMedia.setCreateBy(getUsername());
+        olsMedia.setId(IdWorker.getId());
         return toAjax(olsMediaService.insertOlsMedia(olsMedia));
     }
 

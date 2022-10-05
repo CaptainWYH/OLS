@@ -40,7 +40,8 @@ public class OlsProgressServiceImpl implements IOlsProgressService
     @Override
     public List<OlsProgress> selectOlsProgressList(OlsProgress olsProgress)
     {
-        return olsProgressMapper.selectOlsProgressList(olsProgress);
+        List<OlsProgress> list= olsProgressMapper.selectOlsProgressList(olsProgress);
+        return list;
     }
 
     /**
