@@ -64,8 +64,15 @@ public interface IOlsCourseService extends IService<OlsCourse>
 
     /**
      * 获取我的课程
-     * @param id
+     * @param id 用户id
      * @return
      */
     public List<OlsCourse> getMyCourses(Long id);
+
+    /**
+     * 获取未选择课程
+     * @param id 用户id
+     * @return
+     */
+    public List<OlsCourse> getNotChoseCourse(Long id);
 }

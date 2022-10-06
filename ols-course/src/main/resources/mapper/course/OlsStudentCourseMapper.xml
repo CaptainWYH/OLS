@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ols.course.mapper.OlsStudentCourseMapper">
-    
+
     <resultMap type="OlsStudentCourse" id="OlsStudentCourseResult">
         <result property="id"    column="id"    />
         <result property="studnetId"    column="studnet_id"    />
@@ -17,18 +17,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectOlsStudentCourseList" parameterType="OlsStudentCourse" resultMap="OlsStudentCourseResult">
         <include refid="selectOlsStudentCourseVo"/>
-        <where>  
+        <where>
             <if test="studnetId != null "> and studnet_id = #{studnetId}</if>
             <if test="courseId != null "> and course_id = #{courseId}</if>
             <if test="courseCredit != null "> and course_credit = #{courseCredit}</if>
         </where>
     </select>
-    
+
     <select id="selectOlsStudentCourseById" parameterType="Long" resultMap="OlsStudentCourseResult">
         <include refid="selectOlsStudentCourseVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertOlsStudentCourse" parameterType="OlsStudentCourse">
         insert into ols_student_course
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -60,9 +60,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOlsStudentCourseByIds" parameterType="String">
-        delete from ols_student_course where id in 
+        delete from ols_student_course where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
+    </delete>
+    <delete id="deleteByCourseIdAndUserId">
+        delete from ols_student_course where studnet_id = #{id} and course_id = #{courseId}
     </delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.ols.course.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -16,7 +17,7 @@ import org.springframework.data.annotation.Id;
 
 /**
  * 课程对象 ols_course
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -50,48 +51,48 @@ public class OlsCourse extends BaseEntity
     @TableField("version")
     private Long version;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setCourseCode(String courseCode) 
+    public void setCourseCode(String courseCode)
     {
         this.courseCode = courseCode;
     }
 
-    public String getCourseCode() 
+    public String getCourseCode()
     {
         return courseCode;
     }
-    public void setCourseName(String courseName) 
+    public void setCourseName(String courseName)
     {
         this.courseName = courseName;
     }
 
-    public String getCourseName() 
+    public String getCourseName()
     {
         return courseName;
     }
-    public void setCourseCredit(BigDecimal courseCredit) 
+    public void setCourseCredit(BigDecimal courseCredit)
     {
         this.courseCredit = courseCredit;
     }
 
-    public BigDecimal getCourseCredit() 
+    public BigDecimal getCourseCredit()
     {
         return courseCredit;
     }
-    public void setVersion(Long version) 
+    public void setVersion(Long version)
     {
         this.version = version;
     }
 
-    public Long getVersion() 
+    public Long getVersion()
     {
         return version;
     }
@@ -109,5 +110,30 @@ public class OlsCourse extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("version", getVersion())
             .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OlsCourse)) return false;
+
+        OlsCourse olsCourse = (OlsCourse) o;
+
+        if (!Objects.equals(id, olsCourse.id)) return false;
+        if (!Objects.equals(courseCode, olsCourse.courseCode)) return false;
+        if (!Objects.equals(courseName, olsCourse.courseName)) return false;
+        if (!Objects.equals(courseCredit, olsCourse.courseCredit))
+            return false;
+        return Objects.equals(version, olsCourse.version);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (courseCode != null ? courseCode.hashCode() : 0);
+        result = 31 * result + (courseName != null ? courseName.hashCode() : 0);
+        result = 31 * result + (courseCredit != null ? courseCredit.hashCode() : 0);
+        result = 31 * result + (version != null ? version.hashCode() : 0);
+        return result;
     }
 }

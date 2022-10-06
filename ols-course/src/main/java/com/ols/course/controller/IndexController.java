@@ -6,9 +6,7 @@ import com.ols.common.core.domain.AjaxResult;
 import com.ols.course.service.IOlsCourseService;
 import com.ols.course.service.IOlsStudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ols-course/index")
@@ -30,12 +28,19 @@ public class IndexController extends BaseController {
     }
 
     /**
-     * 选课
+     * 获取选课列表
      */
     @GetMapping("/choseList")
     public AjaxResult choseList(){
 
-        return null;
+        return AjaxResult.success(olsCourseService.getNotChoseCourse(this.getUserId()));
     }
 
+    /**
+     * 退选课程
+     */
+    @DeleteMapping("/cancel/{courseId}")
+    public AjaxResult cancel(@PathVariable("courseId") Long courseId){
+        return toAjax(olsStudentCourseService.cancelCourse(this.getUserId(),courseId));
+    }
 }

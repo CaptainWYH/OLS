@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Entity基类
- * 
+ *
  * @author ruoyi
  */
 public class BaseEntity implements Serializable
@@ -110,5 +112,33 @@ public class BaseEntity implements Serializable
     public void setParams(Map<String, Object> params)
     {
         this.params = params;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseEntity)) return false;
+
+        BaseEntity that = (BaseEntity) o;
+
+        if (!Objects.equals(searchValue, that.searchValue)) return false;
+        if (!Objects.equals(createBy, that.createBy)) return false;
+        if (!Objects.equals(createTime, that.createTime)) return false;
+        if (!Objects.equals(updateBy, that.updateBy)) return false;
+        if (!Objects.equals(updateTime, that.updateTime)) return false;
+        if (!Objects.equals(remark, that.remark)) return false;
+        return Objects.equals(params, that.params);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = searchValue != null ? searchValue.hashCode() : 0;
+        result = 31 * result + (createBy != null ? createBy.hashCode() : 0);
+        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (updateBy != null ? updateBy.hashCode() : 0);
+        result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        result = 31 * result + (remark != null ? remark.hashCode() : 0);
+        result = 31 * result + (params != null ? params.hashCode() : 0);
+        return result;
     }
 }

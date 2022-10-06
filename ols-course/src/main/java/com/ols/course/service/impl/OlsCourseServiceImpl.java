@@ -1,7 +1,9 @@
 package com.ols.course.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ols.common.utils.DateUtils;
@@ -105,5 +107,22 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
     @Override
     public List<OlsCourse> getMyCourses(Long id) {
         return olsCourseMapper.getMyCourses(id);
+    }
+
+    /**
+     * 获取未选择课程
+     * @param id 用户id
+     * @return
+     */
+    @Override
+    public List<OlsCourse> getNotChoseCourse(Long id) {
+        //获取所有课程
+        List<OlsCourse> olsCourses = olsCourseMapper.selectOlsCourseList(new OlsCourse());
+        //获取已选择课程
+        List<OlsCourse> myCourses = this.getMyCourses(id);
+        List<String> collect = myCourses.stream().map(OlsCourse::getCourseCode).collect(Collectors.toList());
+        //求差集
+        List<OlsCourse> result = olsCourses.stream().filter(olsCourse -> !collect.contains(olsCourse.getCourseCode())).collect(Collectors.toList());
+        return result;
     }
 }
