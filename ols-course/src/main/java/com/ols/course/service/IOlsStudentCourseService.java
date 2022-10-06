@@ -66,4 +66,6 @@ public interface IOlsStudentCourseService
      * @return
      */
     public int cancelCourse(Long id,Long courseId);
+
+
 }
