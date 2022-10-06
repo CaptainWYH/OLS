@@ -13,7 +13,7 @@ import com.ols.course.service.IOlsCourseService;
 
 /**
  * 课程Service业务层处理
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -25,7 +25,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 查询课程
-     * 
+     *
      * @param id 课程主键
      * @return 课程
      */
@@ -37,7 +37,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 查询课程列表
-     * 
+     *
      * @param olsCourse 课程
      * @return 课程
      */
@@ -49,7 +49,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 新增课程
-     * 
+     *
      * @param olsCourse 课程
      * @return 结果
      */
@@ -62,7 +62,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 修改课程
-     * 
+     *
      * @param olsCourse 课程
      * @return 结果
      */
@@ -75,7 +75,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 批量删除课程
-     * 
+     *
      * @param ids 需要删除的课程主键
      * @return 结果
      */
@@ -87,7 +87,7 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
 
     /**
      * 删除课程信息
-     * 
+     *
      * @param id 课程主键
      * @return 结果
      */
@@ -95,5 +95,15 @@ public class OlsCourseServiceImpl extends ServiceImpl<OlsCourseMapper, OlsCourse
     public int deleteOlsCourseById(Long id)
     {
         return olsCourseMapper.deleteOlsCourseById(id);
+    }
+
+    /**
+     * 获取我的课程
+     * @param id 用户id
+     * @return
+     */
+    @Override
+    public List<OlsCourse> getMyCourses(Long id) {
+        return olsCourseMapper.getMyCourses(id);
     }
 }

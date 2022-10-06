@@ -7,7 +7,7 @@ import com.ols.course.domain.OlsCourse;
 
 /**
  * 课程Mapper接口
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -15,7 +15,7 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 {
     /**
      * 查询课程
-     * 
+     *
      * @param id 课程主键
      * @return 课程
      */
@@ -23,7 +23,7 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 
     /**
      * 查询课程列表
-     * 
+     *
      * @param olsCourse 课程
      * @return 课程集合
      */
@@ -31,7 +31,7 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 
     /**
      * 新增课程
-     * 
+     *
      * @param olsCourse 课程
      * @return 结果
      */
@@ -39,7 +39,7 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 
     /**
      * 修改课程
-     * 
+     *
      * @param olsCourse 课程
      * @return 结果
      */
@@ -47,7 +47,7 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 
     /**
      * 删除课程
-     * 
+     *
      * @param id 课程主键
      * @return 结果
      */
@@ -55,9 +55,17 @@ public interface OlsCourseMapper extends BaseMapper<OlsCourse>
 
     /**
      * 批量删除课程
-     * 
+     *
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
     public int deleteOlsCourseByIds(Long[] ids);
+
+    /**
+     * 获取我的课程
+     * @param id
+     * @return
+     */
+    public List<OlsCourse> getMyCourses(Long id);
+
 }
