@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ols.course.mapper.OlsMediaMapper">
-    
+
     <resultMap type="OlsMedia" id="OlsMediaResult">
         <result property="id"    column="id"    />
         <result property="sectionId"    column="section_id"    />
@@ -21,18 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectOlsMediaList" parameterType="OlsMedia" resultMap="OlsMediaResult">
         <include refid="selectOlsMediaVo"/>
-        <where>  
+        <where>
             <if test="sectionId != null "> and section_id = #{sectionId}</if>
             <if test="mediaContent != null  and mediaContent != ''"> and media_content = #{mediaContent}</if>
             <if test="version != null "> and version = #{version}</if>
         </where>
     </select>
-    
+
     <select id="selectOlsMediaById" parameterType="Long" resultMap="OlsMediaResult">
         <include refid="selectOlsMediaVo"/>
         where id = #{id}
     </select>
-        
+    <select id="getMedia" resultType="com.ols.course.domain.OlsMedia">
+        select * from ols_media where section_id = #{sectionId}
+    </select>
+
     <insert id="insertOlsMedia" parameterType="OlsMedia">
         insert into ols_media
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOlsMediaByIds" parameterType="String">
-        delete from ols_media where id in 
+        delete from ols_media where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

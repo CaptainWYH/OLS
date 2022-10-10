@@ -105,4 +105,12 @@ public class OlsMediaController extends BaseController
     {
         return toAjax(olsMediaService.deleteOlsMediaByIds(ids));
     }
+
+    /**
+     * 根据章节id获取视频链接
+     */
+    @GetMapping("/getVideo/{sectionId}")
+    public AjaxResult getVideo(@PathVariable("sectionId") Long sectionId){
+        return AjaxResult.success(olsMediaService.getMedia(sectionId));
+    }
 }

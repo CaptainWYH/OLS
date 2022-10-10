@@ -1,5 +1,6 @@
 package com.ols.course.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,6 +106,20 @@ public class OlsSectionServiceImpl extends ServiceImpl<OlsSectionMapper,OlsSecti
      */
     @Override
     public List<SessionsVO> getSessionsByCourseId(Long id) {
-        return olsSectionMapper.getSectionVoList(id);
+        List<SessionsVO> sectionVoList = olsSectionMapper.getSectionVoList(id);
+        //父节点
+        List<SessionsVO> parents = sectionVoList.stream().filter(e -> e.getPId() == null).collect(Collectors.toList());
+        for (SessionsVO parent : parents) {
+            if(null == parent.getChild()){
+                parent.setChild(new ArrayList<SessionsVO>());
+            }
+            List<SessionsVO> children = parent.getChild();
+            for (SessionsVO child : sectionVoList) {
+                if(parent.getId().equals(child.getPId())){
+                    children.add(child);
+                }
+            }
+        }
+        return parents;
     }
 }

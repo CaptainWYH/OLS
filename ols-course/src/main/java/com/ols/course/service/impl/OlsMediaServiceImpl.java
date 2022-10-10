@@ -10,19 +10,19 @@ import com.ols.course.service.IOlsMediaService;
 
 /**
  * 学习媒体Service业务层处理
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
 @Service
-public class OlsMediaServiceImpl implements IOlsMediaService 
+public class OlsMediaServiceImpl implements IOlsMediaService
 {
     @Autowired
     private OlsMediaMapper olsMediaMapper;
 
     /**
      * 查询学习媒体
-     * 
+     *
      * @param id 学习媒体主键
      * @return 学习媒体
      */
@@ -34,7 +34,7 @@ public class OlsMediaServiceImpl implements IOlsMediaService
 
     /**
      * 查询学习媒体列表
-     * 
+     *
      * @param olsMedia 学习媒体
      * @return 学习媒体
      */
@@ -46,7 +46,7 @@ public class OlsMediaServiceImpl implements IOlsMediaService
 
     /**
      * 新增学习媒体
-     * 
+     *
      * @param olsMedia 学习媒体
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class OlsMediaServiceImpl implements IOlsMediaService
 
     /**
      * 修改学习媒体
-     * 
+     *
      * @param olsMedia 学习媒体
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class OlsMediaServiceImpl implements IOlsMediaService
 
     /**
      * 批量删除学习媒体
-     * 
+     *
      * @param ids 需要删除的学习媒体主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class OlsMediaServiceImpl implements IOlsMediaService
 
     /**
      * 删除学习媒体信息
-     * 
+     *
      * @param id 学习媒体主键
      * @return 结果
      */
@@ -92,5 +92,15 @@ public class OlsMediaServiceImpl implements IOlsMediaService
     public int deleteOlsMediaById(Long id)
     {
         return olsMediaMapper.deleteOlsMediaById(id);
+    }
+
+    /**
+     * 根据sectionId获取视频
+     * @param sectionId
+     * @return
+     */
+    @Override
+    public OlsMedia getMedia(Long sectionId) {
+        return olsMediaMapper.getMedia(sectionId);
     }
 }

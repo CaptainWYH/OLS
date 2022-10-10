@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
     <select id="getSectionVoList" resultType="com.ols.course.domain.vo.SessionsVO">
-        select * from ols_section where course_id = #{id}
+        select * from ols_section where course_id = #{id} order by section_name
     </select>
 
     <insert id="insertOlsSection" parameterType="OlsSection">

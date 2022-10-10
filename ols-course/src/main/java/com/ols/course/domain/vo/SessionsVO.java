@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,18 @@ public class SessionsVO {
     private Long id;
 
     /**
+     * pid
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long pId;
+
+    /**
      * 章节名称
      */
     private String sectionName;
+
+    /**
+     * 子章节
+     */
+    private List<SessionsVO> child;
 }
