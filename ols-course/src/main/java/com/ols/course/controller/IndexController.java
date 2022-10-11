@@ -2,6 +2,7 @@ package com.ols.course.controller;
 
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.ols.common.annotation.Anonymous;
 import com.ols.common.core.controller.BaseController;
 import com.ols.common.core.domain.AjaxResult;
 import com.ols.course.domain.OlsStudentCourse;
@@ -10,6 +11,7 @@ import com.ols.course.service.IOlsStudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Anonymous
 @RestController
 @RequestMapping("/ols-course/index")
 public class IndexController extends BaseController {

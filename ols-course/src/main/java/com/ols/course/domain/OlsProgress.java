@@ -31,10 +31,12 @@ public class OlsProgress extends BaseEntity
 
     /** 媒体id */
     @Excel(name = "媒体id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long mediaId;
 
     /** 学生id */
     @Excel(name = "学生id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long studentId;
 
     /** 进度状态：0.0% 1.33.3% 2.66.6% 3.100% */

@@ -104,6 +104,7 @@ public class OlsProgressServiceImpl implements IOlsProgressService
             progress.setMediaId(mediaId);
             progress.setStudentId(studentId);
             progress.setCurTime(0);
+            progress.setProgressStatus(0);
             //插入到数据库
             olsProgressMapper.insertOlsProgress(progress);
         }

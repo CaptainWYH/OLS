@@ -10,7 +10,7 @@ import com.ols.common.core.domain.BaseEntity;
 
 /**
  * 章节对象 ols_section
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -29,6 +29,10 @@ public class OlsSection extends BaseEntity
     @TableField("course_id")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long courseId;
+    /**
+     * parentId
+     */
+    private Long parentId;
 
     /** 章节名称 */
     @Excel(name = "章节名称")
@@ -40,39 +44,47 @@ public class OlsSection extends BaseEntity
     @Version
     private Long version;
 
-    public void setId(Long id) 
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setCourseId(Long courseId) 
+    public void setCourseId(Long courseId)
     {
         this.courseId = courseId;
     }
 
-    public Long getCourseId() 
+    public Long getCourseId()
     {
         return courseId;
     }
-    public void setSectionName(String sectionName) 
+    public void setSectionName(String sectionName)
     {
         this.sectionName = sectionName;
     }
 
-    public String getSectionName() 
+    public String getSectionName()
     {
         return sectionName;
     }
-    public void setVersion(Long version) 
+    public void setVersion(Long version)
     {
         this.version = version;
     }
 
-    public Long getVersion() 
+    public Long getVersion()
     {
         return version;
     }
