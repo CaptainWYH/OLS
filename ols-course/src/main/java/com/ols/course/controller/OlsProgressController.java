@@ -23,7 +23,7 @@ import com.ols.common.core.page.TableDataInfo;
 
 /**
  * 进度Controller
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -101,4 +101,23 @@ public class OlsProgressController extends BaseController
     {
         return toAjax(olsProgressService.deleteOlsProgressByIds(ids));
     }
+
+    /**
+     * 获取当前进度状态
+     */
+    @GetMapping("/getProgress/{mediaId}")
+    public AjaxResult getProgress(@PathVariable("mediaId") Long mediaId){
+        Long studentId = this.getUserId();
+        return AjaxResult.success(olsProgressService.getProgressByMediaIdAndStudentId(mediaId,studentId));
+    }
+    /**
+     * 更新播放进度
+     */
+    @PutMapping("updateProgress")
+    public AjaxResult updateProgress(@RequestBody OlsProgress olsProgress)
+    {
+        olsProgress.setStudentId(getUserId());
+        return toAjax(olsProgressService.updateProgressByMediaIdAndStudentId(olsProgress));
+    }
+
 }

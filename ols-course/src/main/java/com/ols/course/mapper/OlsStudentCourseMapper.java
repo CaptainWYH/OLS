@@ -2,6 +2,7 @@ package com.ols.course.mapper;
 
 import java.util.List;
 import com.ols.course.domain.OlsStudentCourse;
+import com.ols.course.domain.vo.StudentCourseListVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -27,6 +28,14 @@ public interface OlsStudentCourseMapper
      * @return 选课集合
      */
     public List<OlsStudentCourse> selectOlsStudentCourseList(OlsStudentCourse olsStudentCourse);
+
+    /**
+     * 查询选课列表
+     *
+     * @param olsStudentCourse 选课
+     * @return 选课集合
+     */
+    public List<StudentCourseListVO> selectOlsStudentCourseListVO(OlsStudentCourse olsStudentCourse);
 
     /**
      * 新增选课

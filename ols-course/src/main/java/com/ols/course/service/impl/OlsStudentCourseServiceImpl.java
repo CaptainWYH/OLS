@@ -1,6 +1,8 @@
 package com.ols.course.service.impl;
 
 import java.util.List;
+
+import com.ols.course.domain.vo.StudentCourseListVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ols.course.mapper.OlsStudentCourseMapper;
@@ -41,6 +43,11 @@ public class OlsStudentCourseServiceImpl implements IOlsStudentCourseService
     public List<OlsStudentCourse> selectOlsStudentCourseList(OlsStudentCourse olsStudentCourse)
     {
         return olsStudentCourseMapper.selectOlsStudentCourseList(olsStudentCourse);
+    }
+
+    @Override
+    public List<StudentCourseListVO> selectOlsStudentCourseListVO(OlsStudentCourse olsStudentCourse) {
+        return olsStudentCourseMapper.selectOlsStudentCourseListVO(olsStudentCourse);
     }
 
     /**

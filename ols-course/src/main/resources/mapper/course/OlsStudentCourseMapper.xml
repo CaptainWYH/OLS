@@ -28,6 +28,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectOlsStudentCourseVo"/>
         where id = #{id}
     </select>
+    <select id="selectOlsStudentCourseListVO" resultType="com.ols.course.domain.vo.StudentCourseListVO">
+        SELECT
+            osc.id id,
+            osc.studnet_id studnet_id,
+            osc.course_id course_id,
+            u.nick_name nick_name,
+            oc.course_name course_name,
+            osc.course_credit course_credit
+        FROM ols_student_course osc
+        LEFT JOIN ols_course oc
+        ON osc.course_id = oc.id
+        LEFT JOIN sys_user u
+        ON osc.studnet_id = u.user_id
+        <where>
+            <if test="studnetId != null "> and osc.studnet_id = #{studnetId}</if>
+            <if test="courseId != null "> and osc.course_id = #{courseId}</if>
+            <if test="courseCredit != null "> and osc.course_credit = #{courseCredit}</if>
+        </where>
+    </select>
 
     <insert id="insertOlsStudentCourse" parameterType="OlsStudentCourse">
         insert into ols_student_course

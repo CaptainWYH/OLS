@@ -2,6 +2,7 @@ package com.ols.course.service;
 
 import java.util.List;
 import com.ols.course.domain.OlsStudentCourse;
+import com.ols.course.domain.vo.StudentCourseListVO;
 
 /**
  * 选课Service接口
@@ -26,6 +27,14 @@ public interface IOlsStudentCourseService
      * @return 选课集合
      */
     public List<OlsStudentCourse> selectOlsStudentCourseList(OlsStudentCourse olsStudentCourse);
+
+    /**
+     * 查询选课列表
+     *
+     * @param olsStudentCourse 选课
+     * @return 选课集合
+     */
+    public List<StudentCourseListVO> selectOlsStudentCourseListVO(OlsStudentCourse olsStudentCourse);
 
     /**
      * 新增选课

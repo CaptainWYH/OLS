@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ols.course.mapper.OlsProgressMapper">
-    
+
     <resultMap type="OlsProgress" id="OlsProgressResult">
         <result property="id"    column="id"    />
         <result property="mediaId"    column="media_id"    />
@@ -17,18 +17,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectOlsProgressList" parameterType="OlsProgress" resultMap="OlsProgressResult">
         <include refid="selectOlsProgressVo"/>
-        <where>  
+        <where>
             <if test="mediaId != null "> and media_id = #{mediaId}</if>
             <if test="studentId != null "> and student_id = #{studentId}</if>
             <if test="progressStatus != null "> and progress_status = #{progressStatus}</if>
         </where>
     </select>
-    
+
     <select id="selectOlsProgressById" parameterType="Long" resultMap="OlsProgressResult">
         <include refid="selectOlsProgressVo"/>
         where id = #{id}
     </select>
-        
+    <select id="getProgressByMediaIdAndStudentId" resultType="com.ols.course.domain.OlsProgress">
+        select * from ols_progress where media_id = #{mediaId} and student_id = #{studentId}
+    </select>
+
     <insert id="insertOlsProgress" parameterType="OlsProgress">
         insert into ols_progress
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -36,12 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mediaId != null">media_id,</if>
             <if test="studentId != null">student_id,</if>
             <if test="progressStatus != null">progress_status,</if>
+            <if test="curTime != null">cur_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="mediaId != null">#{mediaId},</if>
             <if test="studentId != null">#{studentId},</if>
             <if test="progressStatus != null">#{progressStatus},</if>
+            <if test="curTime != null">#{curTime},</if>
          </trim>
     </insert>
 
@@ -51,8 +56,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mediaId != null">media_id = #{mediaId},</if>
             <if test="studentId != null">student_id = #{studentId},</if>
             <if test="progressStatus != null">progress_status = #{progressStatus},</if>
+            <if test="curTime != null">cur_time = #{curTime},</if>
         </trim>
         where id = #{id}
+    </update>
+
+    <update id="updateOlsProgressPlus" parameterType="OlsProgress">
+        update ols_progress
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mediaId != null">media_id = #{mediaId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="progressStatus != null">progress_status = #{progressStatus},</if>
+            <if test="curTime != null">cur_time = #{curTime},</if>
+        </trim>
+        where media_id = #{mediaId} and student_id = #{studentId}
     </update>
 
     <delete id="deleteOlsProgressById" parameterType="Long">
@@ -60,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteOlsProgressByIds" parameterType="String">
-        delete from ols_progress where id in 
+        delete from ols_progress where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -23,6 +23,7 @@ public class OlsMedia extends BaseEntity
 
     /** 章节id */
     @Excel(name = "章节id")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long sectionId;
 
     /** 媒体内容 */

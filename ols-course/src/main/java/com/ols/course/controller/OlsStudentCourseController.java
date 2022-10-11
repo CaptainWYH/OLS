@@ -2,6 +2,8 @@ package com.ols.course.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ols.course.domain.vo.StudentCourseListVO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ols.common.core.page.TableDataInfo;
 
 /**
  * 选课Controller
- * 
+ *
  * @author 魏渝辉
  * @date 2022-10-04
  */
@@ -42,7 +44,7 @@ public class OlsStudentCourseController extends BaseController
     public TableDataInfo list(OlsStudentCourse olsStudentCourse)
     {
         startPage();
-        List<OlsStudentCourse> list = olsStudentCourseService.selectOlsStudentCourseList(olsStudentCourse);
+        List<StudentCourseListVO> list = olsStudentCourseService.selectOlsStudentCourseListVO(olsStudentCourse);
         return getDataTable(list);
     }
 
